@@ -91,8 +91,6 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 
-
-
 function displayMenuItems(menuItems){
   let displayMenu = menuItems.map(function (item){
       
