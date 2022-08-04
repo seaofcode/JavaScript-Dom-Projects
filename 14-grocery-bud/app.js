@@ -19,6 +19,9 @@ form.addEventListener('submit', addItem);
 // clear items
 clearBtn.addEventListener('click', clearItems);
 
+// load items
+window.addEventListener('DOMContentLoaded', setupItems);
+
 // ****** FUNCTIONS **********
 function addItem(e){
     e.preventDefault();
@@ -62,7 +65,7 @@ function addItem(e){
     else if(value && editFlag){
         editElement.innerHTML = value;
         displayAlert('value changed', 'success');
-        // editLocalStorage(editID, value);
+        editLocalStorage(editID, value);
         setBackToDefault();
     }
     else{
@@ -152,7 +155,16 @@ function removeFromLocalStorage(id){
 }
 
 
-function editLocalStorage(id, value){}
+function editLocalStorage(id, value){
+    let items = getLocalStorage();
+    items = items.map(function(item){
+        if(item.id === id){
+            item.value = value;
+        }
+        return item;
+    });
+    localStorage.setItem('list', JSON.stringify(items));
+}
 
 function getLocalStorage() {
     return localStorage.getItem('list')
